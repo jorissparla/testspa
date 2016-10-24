@@ -7897,11 +7897,62 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _user$project$App$matchId = F2(
+var _user$project$Types$Account = F2(
+	function (a, b) {
+		return {id: a, name: b};
+	});
+var _user$project$Types$Model = F2(
+	function (a, b) {
+		return {currentpage: a, accounts: b};
+	});
+var _user$project$Types$NotFoundPage = {ctor: 'NotFoundPage'};
+var _user$project$Types$AccountDetails = function (a) {
+	return {ctor: 'AccountDetails', _0: a};
+};
+var _user$project$Types$AccountsPage = {ctor: 'AccountsPage'};
+var _user$project$Types$HomePage = {ctor: 'HomePage'};
+var _user$project$Types$NoMsg = {ctor: 'NoMsg'};
+var _user$project$Types$NavigatePage = function (a) {
+	return {ctor: 'NavigatePage', _0: a};
+};
+
+var _user$project$State$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		if (_p0.ctor === 'NoMsg') {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{currentpage: _user$project$Types$HomePage}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					model,
+					{currentpage: _p0._0}),
+				_1: _elm_lang$core$Platform_Cmd$none
+			};
+		}
+	});
+var _user$project$State$initialModel = {
+	currentpage: _user$project$Types$HomePage,
+	accounts: _elm_lang$core$Native_List.fromArray(
+		[
+			{id: 1, name: 'BMW'},
+			{id: 2, name: 'Volkswagen'},
+			{id: 3, name: 'Audi'}
+		])
+};
+var _user$project$State$init = {ctor: '_Tuple2', _0: _user$project$State$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
+
+var _user$project$View$matchId = F2(
 	function (accid, account) {
 		return _elm_lang$core$Native_Utils.eq(accid, account.id);
 	});
-var _user$project$App$vac = function (account) {
+var _user$project$View$vac = function (account) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -7927,12 +7978,12 @@ var _user$project$App$vac = function (account) {
 					]))
 			]));
 };
-var _user$project$App$viewAccountDetails = F2(
+var _user$project$View$viewAccountDetails = F2(
 	function (accid, model) {
 		var account = _elm_lang$core$List$head(
 			A2(
 				_elm_lang$core$List$filter,
-				_user$project$App$matchId(accid),
+				_user$project$View$matchId(accid),
 				model.accounts));
 		var _p0 = account;
 		if (_p0.ctor === 'Nothing') {
@@ -7973,104 +8024,21 @@ var _user$project$App$viewAccountDetails = F2(
 					]));
 		}
 	});
-var _user$project$App$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
-};
-var _user$project$App$Account = F2(
-	function (a, b) {
-		return {id: a, name: b};
-	});
-var _user$project$App$Model = F2(
-	function (a, b) {
-		return {currentpage: a, accounts: b};
-	});
-var _user$project$App$NotFoundPage = {ctor: 'NotFoundPage'};
-var _user$project$App$AccountDetails = function (a) {
-	return {ctor: 'AccountDetails', _0: a};
-};
-var _user$project$App$AccountsPage = {ctor: 'AccountsPage'};
-var _user$project$App$HomePage = {ctor: 'HomePage'};
-var _user$project$App$initialModel = {
-	currentpage: _user$project$App$HomePage,
-	accounts: _elm_lang$core$Native_List.fromArray(
-		[
-			{id: 1, name: 'BMW'},
-			{id: 2, name: 'Volkswagen'},
-			{id: 3, name: 'Audi'}
-		])
-};
-var _user$project$App$init = {ctor: '_Tuple2', _0: _user$project$App$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
-var _user$project$App$update = F2(
-	function (msg, model) {
-		var _p2 = msg;
-		if (_p2.ctor === 'NoMsg') {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{currentpage: _user$project$App$HomePage}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
-		} else {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{currentpage: _p2._0}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
-		}
-	});
-var _user$project$App$NoMsg = {ctor: 'NoMsg'};
-var _user$project$App$NavigatePage = function (a) {
-	return {ctor: 'NavigatePage', _0: a};
-};
-var _user$project$App$viewHeader = function (model) {
-	return A2(
-		_elm_lang$html$Html$ul,
-		_elm_lang$core$Native_List.fromArray(
-			[]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$li,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Events$onClick(
-						_user$project$App$NavigatePage(_user$project$App$HomePage))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Home Page')
-					])),
-				A2(
-				_elm_lang$html$Html$li,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Events$onClick(
-						_user$project$App$NavigatePage(_user$project$App$AccountsPage))
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('Accounts')
-					]))
-			]));
-};
-var _user$project$App$viewAccount = function (account) {
+var _user$project$View$viewAccount = function (account) {
 	return A2(
 		_elm_lang$html$Html$li,
 		_elm_lang$core$Native_List.fromArray(
 			[
 				_elm_lang$html$Html_Events$onClick(
-				_user$project$App$NavigatePage(
-					_user$project$App$AccountDetails(account.id)))
+				_user$project$Types$NavigatePage(
+					_user$project$Types$AccountDetails(account.id)))
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				_elm_lang$html$Html$text(account.name)
 			]));
 };
-var _user$project$App$viewAccounts = function (model) {
+var _user$project$View$viewAccounts = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8104,21 +8072,52 @@ var _user$project$App$viewAccounts = function (model) {
 										{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
 									]))
 							]),
-						A2(_elm_lang$core$List$map, _user$project$App$viewAccount, model.accounts))
+						A2(_elm_lang$core$List$map, _user$project$View$viewAccount, model.accounts))
 					]))
 			]));
 };
-var _user$project$App$view = function (model) {
+var _user$project$View$viewHeader = function (model) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$li,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$Types$NavigatePage(_user$project$Types$HomePage))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Home Page')
+					])),
+				A2(
+				_elm_lang$html$Html$li,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$Types$NavigatePage(_user$project$Types$AccountsPage))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Accounts')
+					]))
+			]));
+};
+var _user$project$View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_user$project$App$viewHeader(model),
+				_user$project$View$viewHeader(model),
 				function () {
-				var _p3 = model.currentpage;
-				switch (_p3.ctor) {
+				var _p2 = model.currentpage;
+				switch (_p2.ctor) {
 					case 'HomePage':
 						return A2(
 							_elm_lang$html$Html$div,
@@ -8136,10 +8135,10 @@ var _user$project$App$view = function (model) {
 							_elm_lang$core$Native_List.fromArray(
 								[
 									_elm_lang$html$Html$text('Account List Page'),
-									_user$project$App$viewAccounts(model)
+									_user$project$View$viewAccounts(model)
 								]));
 					case 'AccountDetails':
-						var _p4 = _p3._0;
+						var _p3 = _p2._0;
 						return A2(
 							_elm_lang$html$Html$div,
 							_elm_lang$core$Native_List.fromArray(
@@ -8150,8 +8149,8 @@ var _user$project$App$view = function (model) {
 									A2(
 										_elm_lang$core$Basics_ops['++'],
 										'Account List Page',
-										_elm_lang$core$Basics$toString(_p4))),
-									A2(_user$project$App$viewAccountDetails, _p4, model)
+										_elm_lang$core$Basics$toString(_p3))),
+									A2(_user$project$View$viewAccountDetails, _p3, model)
 								]));
 					default:
 						return A2(
@@ -8166,9 +8165,13 @@ var _user$project$App$view = function (model) {
 			}()
 			]));
 };
+
+var _user$project$App$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
 var _user$project$App$main = {
 	main: _elm_lang$html$Html_App$program(
-		{init: _user$project$App$init, update: _user$project$App$update, view: _user$project$App$view, subscriptions: _user$project$App$subscriptions})
+		{init: _user$project$State$init, update: _user$project$State$update, view: _user$project$View$view, subscriptions: _user$project$App$subscriptions})
 };
 
 var Elm = {};
