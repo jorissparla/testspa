@@ -7901,6 +7901,10 @@ var _user$project$Types$Account = F2(
 	function (a, b) {
 		return {id: a, name: b};
 	});
+var _user$project$Types$Account0 = F7(
+	function (a, b, c, d, e, f, g) {
+		return {uic: a, fullname: b, team: c, location: d, region: e, date_changed: f, workload: g};
+	});
 var _user$project$Types$Model = F2(
 	function (a, b) {
 		return {currentpage: a, accounts: b};
