@@ -8790,6 +8790,219 @@ var _user$project$State$initialModel = {
 };
 var _user$project$State$init = {ctor: '_Tuple2', _0: _user$project$State$initialModel, _1: _user$project$Rest$getAccounts};
 
+var _user$project$View$getTeam = function (team) {
+	return _elm_lang$core$String$isEmpty(team) ? 'No Team entered' : team;
+};
+var _user$project$View$regionColor = function (region) {
+	var _p0 = region;
+	switch (_p0) {
+		case 'EMEA':
+			return 'mdl-card mdl-color--light-blue-400 mdl-shadow--2dp';
+		case 'NA':
+			return 'mdl-card mdl-color--deep-orange-400 mdl-shadow--2dp';
+		case 'APJ':
+			return 'mdl-card mdl-color--green-400 mdl-shadow--2dp';
+		case 'GLB':
+			return 'mdl-card mdl-color--red-400 mdl-shadow--2dp';
+		default:
+			return 'mdl-card mdl-color--purple-400 mdl-shadow--2dp';
+	}
+};
+var _user$project$View$getFullName = function (name) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		A2(
+			_elm_lang$core$String$append,
+			name,
+			A2(
+				_elm_lang$core$String$repeat,
+				100 - _elm_lang$core$String$length(name),
+				'_')),
+		'.');
+};
+var _user$project$View$alternateView = function (accounts) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class(
+				_user$project$View$regionColor(accounts.region)),
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						{ctor: '_Tuple2', _0: 'min-height', _1: '0px'},
+						{ctor: '_Tuple2', _0: 'margin', _1: '4px 8px 4px 0px'},
+						{ctor: '_Tuple2', _0: 'height', _1: '192px'},
+						{ctor: '_Tuple2', _0: 'width', _1: '220px'},
+						{ctor: '_Tuple2', _0: 'transition', _1: 'box-shadow 250ms ease-in-out 0s'}
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mdl-card__title'),
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'align-items', _1: 'flex-start'},
+								{ctor: '_Tuple2', _0: 'flex-direction', _1: 'column'},
+								{ctor: '_Tuple2', _0: 'justify-content', _1: 'flex-end'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$h1,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('mdl-color-text--white mdl-card__title-text'),
+								_elm_lang$html$Html_Attributes$style(
+								_elm_lang$core$Native_List.fromArray(
+									[
+										{ctor: '_Tuple2', _0: 'align-self', _1: 'flex-start'}
+									]))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(
+								_user$project$View$getFullName(accounts.fullname))
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mdl-color-text--white mdl-card__supporting-text')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_user$project$View$getTeam(accounts.team))
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mdl-color-text--white mdl-card--border mdl-card__actions'),
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'align-items', _1: 'bottom'},
+								{ctor: '_Tuple2', _0: 'height', _1: '30px'},
+								{ctor: '_Tuple2', _0: 'justify-content', _1: 'space-between'},
+								{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
+							]))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('mdl-typography--caption-force-preferred-font-color-contrast'),
+								_elm_lang$html$Html_Attributes$style(
+								_elm_lang$core$Native_List.fromArray(
+									[
+										{ctor: '_Tuple2', _0: 'opacity', _1: '0.87'}
+									]))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(accounts.region)
+							])),
+						A2(
+						_elm_lang$html$Html$span,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('mdl-typography--caption-force-preferred-font-color-contrast'),
+								_elm_lang$html$Html_Attributes$style(
+								_elm_lang$core$Native_List.fromArray(
+									[
+										{ctor: '_Tuple2', _0: 'opacity', _1: '0.87'}
+									]))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(accounts.location)
+							])),
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('mdl-js-ripple-effect mdl-js-button mdl-button mdl-button--icon')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$i,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('material-icons')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('edit')
+									])),
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('mdl-button__ripple-container')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$span,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('mdl-ripple is-animating')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[]))
+									]))
+							])),
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('mdl-js-ripple-effect mdl-js-button mdl-button mdl-button--icon')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$i,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('material-icons')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('delete')
+									])),
+								A2(
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('mdl-button__ripple-container')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										A2(
+										_elm_lang$html$Html$span,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('mdl-ripple is-animating')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[]))
+									]))
+							]))
+					]))
+			]));
+};
 var _user$project$View$matchId = F2(
 	function (accid, account) {
 		return _elm_lang$core$Native_Utils.eq(accid, account.uic);
@@ -8827,8 +9040,8 @@ var _user$project$View$viewAccountDetails = F2(
 				_elm_lang$core$List$filter,
 				_user$project$View$matchId(accid),
 				accounts));
-		var _p0 = account;
-		if (_p0.ctor === 'Nothing') {
+		var _p1 = account;
+		if (_p1.ctor === 'Nothing') {
 			return A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
@@ -8838,7 +9051,7 @@ var _user$project$View$viewAccountDetails = F2(
 						_elm_lang$html$Html$text('Not Found')
 					]));
 		} else {
-			var _p1 = _p0._0;
+			var _p2 = _p1._0;
 			return A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
@@ -8852,32 +9065,21 @@ var _user$project$View$viewAccountDetails = F2(
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_elm_lang$html$Html$text(
-								A2(_elm_lang$core$Basics_ops['++'], 'Account', _p1.fullname)),
+								A2(_elm_lang$core$Basics_ops['++'], 'Account', _p2.fullname)),
 								A2(
 								_elm_lang$html$Html$div,
 								_elm_lang$core$Native_List.fromArray(
 									[]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text(_p1.uic)
+										_elm_lang$html$Html$text(_p2.uic)
 									]))
 							]))
 					]));
 		}
 	});
 var _user$project$View$viewAccount = function (account) {
-	return A2(
-		_elm_lang$html$Html$li,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Events$onClick(
-				_user$project$Types$NavigatePage(
-					_user$project$Types$AccountDetails(account.uic)))
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text(account.fullname)
-			]));
+	return _user$project$View$alternateView(account);
 };
 var _user$project$View$viewAccounts = function (model) {
 	return A2(
@@ -8957,8 +9159,8 @@ var _user$project$View$view = function (model) {
 			[
 				_user$project$View$viewHeader(model),
 				function () {
-				var _p2 = model.currentpage;
-				switch (_p2.ctor) {
+				var _p3 = model.currentpage;
+				switch (_p3.ctor) {
 					case 'HomePage':
 						return A2(
 							_elm_lang$html$Html$div,
@@ -8975,20 +9177,16 @@ var _user$project$View$view = function (model) {
 								[]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html$text('Account List Page'),
 									_user$project$View$viewAccounts(model)
 								]));
 					case 'AccountDetails':
-						var _p3 = _p2._0;
 						return A2(
 							_elm_lang$html$Html$div,
 							_elm_lang$core$Native_List.fromArray(
 								[]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html$text(
-									A2(_elm_lang$core$Basics_ops['++'], 'Account List Page', _p3)),
-									A2(_user$project$View$viewAccountDetails, _p3, model.accounts)
+									A2(_user$project$View$viewAccountDetails, _p3._0, model.accounts)
 								]));
 					default:
 						return A2(

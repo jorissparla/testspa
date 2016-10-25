@@ -3,6 +3,7 @@ module View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import String
 import Types exposing (..)
 
 
@@ -16,14 +17,12 @@ view model =
 
             AccountsPage ->
                 div []
-                    [ text "Account List Page"
-                    , viewAccounts model
+                    [ viewAccounts model
                     ]
 
             AccountDetails accid ->
                 div []
-                    [ text ("Account List Page" ++ accid)
-                    , viewAccountDetails accid model.accounts
+                    [ viewAccountDetails accid model.accounts
                     ]
 
             NotFoundPage ->
@@ -49,7 +48,8 @@ viewAccounts model =
 
 viewAccount : Account -> Html Msg
 viewAccount account =
-    li [ onClick (NavigatePage (AccountDetails account.uic)) ] [ text account.fullname ]
+    -- li [ onClick (NavigatePage (AccountDetails account.uic)) ] [ text account.fullname ]
+    alternateView account
 
 
 viewAccountDetails : String -> List Account -> Html Msg
@@ -82,3 +82,67 @@ vac account =
 
 matchId accid account =
     (accid == account.uic)
+
+
+getFullName name =
+    String.append name (String.repeat (100 - (String.length name)) "_") ++ "."
+
+
+regionColor region =
+    case region of
+        "EMEA" ->
+            "mdl-card mdl-color--light-blue-400 mdl-shadow--2dp"
+
+        "NA" ->
+            "mdl-card mdl-color--deep-orange-400 mdl-shadow--2dp"
+
+        "APJ" ->
+            "mdl-card mdl-color--green-400 mdl-shadow--2dp"
+
+        "GLB" ->
+            "mdl-card mdl-color--red-400 mdl-shadow--2dp"
+
+        _ ->
+            "mdl-card mdl-color--purple-400 mdl-shadow--2dp"
+
+
+getTeam : String -> String
+getTeam team =
+    if String.isEmpty team then
+        "No Team entered"
+    else
+        team
+
+
+alternateView : Account -> Html Msg
+alternateView accounts =
+    div [ class (regionColor accounts.region), style [ ( "min-height", "0px" ), ( "margin", "4px 8px 4px 0px" ), ( "height", "192px" ), ( "width", "220px" ), ( "transition", "box-shadow 250ms ease-in-out 0s" ) ] ]
+        [ div [ class "mdl-card__title", style [ ( "align-items", "flex-start" ), ( "flex-direction", "column" ), ( "justify-content", "flex-end" ) ] ]
+            [ h1 [ class "mdl-color-text--white mdl-card__title-text", style [ ( "align-self", "flex-start" ) ] ]
+                [ text (getFullName accounts.fullname) ]
+            ]
+        , div [ class "mdl-color-text--white mdl-card__supporting-text" ]
+            [ text (getTeam accounts.team) ]
+        , div [ class "mdl-color-text--white mdl-card--border mdl-card__actions", style [ ( "align-items", "bottom" ), ( "height", "30px" ), ( "justify-content", "space-between" ), ( "display", "flex" ) ] ]
+            [ span [ class "mdl-typography--caption-force-preferred-font-color-contrast", style [ ( "opacity", "0.87" ) ] ]
+                [ text accounts.region ]
+            , span [ class "mdl-typography--caption-force-preferred-font-color-contrast", style [ ( "opacity", "0.87" ) ] ]
+                [ text accounts.location ]
+            , button [ class "mdl-js-ripple-effect mdl-js-button mdl-button mdl-button--icon" ]
+                [ i [ class "material-icons" ]
+                    [ text "edit" ]
+                , span [ class "mdl-button__ripple-container" ]
+                    [ span [ class "mdl-ripple is-animating" ]
+                        []
+                    ]
+                ]
+            , button [ class "mdl-js-ripple-effect mdl-js-button mdl-button mdl-button--icon" ]
+                [ i [ class "material-icons" ]
+                    [ text "delete" ]
+                , span [ class "mdl-button__ripple-container" ]
+                    [ span [ class "mdl-ripple is-animating" ]
+                        []
+                    ]
+                ]
+            ]
+        ]
