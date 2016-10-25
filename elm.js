@@ -9045,6 +9045,71 @@ var _user$project$View$vac = function (account) {
 					]))
 			]));
 };
+var _user$project$View$accountDetailView = function (account) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class(''),
+				_elm_lang$html$Html_Attributes$style(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						{ctor: '_Tuple2', _0: 'justify-content', _1: 'left'},
+						{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
+						{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('mdl-textfield--floating-label is-upgraded mdl-js-textfield mdl-textfield')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$textarea,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$autofocus(true),
+										_elm_lang$html$Html_Attributes$maxlength(5),
+										_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
+										_elm_lang$html$Html_Attributes$style(
+										_elm_lang$core$Native_List.fromArray(
+											[
+												{ctor: '_Tuple2', _0: 'outline', _1: 'none'}
+											]))
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[])),
+								A2(
+								_elm_lang$html$Html$label,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('mdl-textfield__label')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Multiline textfield (0 of 5 char limit)')
+									])),
+								A2(
+								_elm_lang$html$Html$div,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[]))
+							]))
+					]))
+			]));
+};
 var _user$project$View$viewAccountDetails = F2(
 	function (accid, accounts) {
 		var account = _elm_lang$core$List$head(
@@ -9063,31 +9128,7 @@ var _user$project$View$viewAccountDetails = F2(
 						_elm_lang$html$Html$text('Not Found')
 					]));
 		} else {
-			var _p2 = _p1._0;
-			return A2(
-				_elm_lang$html$Html$div,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$h2,
-						_elm_lang$core$Native_List.fromArray(
-							[]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text(
-								A2(_elm_lang$core$Basics_ops['++'], 'Account', _p2.fullname)),
-								A2(
-								_elm_lang$html$Html$div,
-								_elm_lang$core$Native_List.fromArray(
-									[]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text(_p2.uic)
-									]))
-							]))
-					]));
+			return _user$project$View$accountDetailView(_p1._0);
 		}
 	});
 var _user$project$View$viewAccount = function (account) {
@@ -9239,8 +9280,8 @@ var _user$project$View$view = function (model) {
 			[
 				_user$project$View$viewHeader(model),
 				function () {
-				var _p3 = model.currentpage;
-				switch (_p3.ctor) {
+				var _p2 = model.currentpage;
+				switch (_p2.ctor) {
 					case 'HomePage':
 						return A2(
 							_elm_lang$html$Html$div,
@@ -9267,7 +9308,7 @@ var _user$project$View$view = function (model) {
 								[]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									A2(_user$project$View$viewAccountDetails, _p3._0, model.accounts)
+									A2(_user$project$View$viewAccountDetails, _p2._0, model.accounts)
 								]));
 					default:
 						return A2(

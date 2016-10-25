@@ -92,12 +92,22 @@ viewAccountDetails accid accounts =
                 div [] [ text "Not Found" ]
 
             Just account ->
-                div []
-                    [ h2 []
-                        [ text ("Account" ++ account.fullname)
-                        , div [] [ text account.uic ]
-                        ]
-                    ]
+                accountDetailView account
+
+
+accountDetailView account =
+    div [ class "", style [ ( "justify-content", "left" ), ( "align-items", "center" ), ( "display", "flex" ) ] ]
+        [ div []
+            [ div [ class "mdl-textfield--floating-label is-upgraded mdl-js-textfield mdl-textfield" ]
+                [ textarea [ autofocus True, maxlength 5, class "mdl-textfield__input", style [ ( "outline", "none" ) ] ]
+                    []
+                , label [ class "mdl-textfield__label" ]
+                    [ text "Multiline textfield (0 of 5 char limit)" ]
+                , div []
+                    []
+                ]
+            ]
+        ]
 
 
 vac account =
