@@ -9050,13 +9050,11 @@ var _user$project$View$accountDetailView = function (account) {
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class(''),
+				_elm_lang$html$Html_Attributes$class('mdl-cell--2-offset-desktop mdl-cell--8-col-desktop mdl-cell--1-offset-tablet mdl-cell--6-col-tablet mdl-cell--4-col-phone mdl-cell'),
 				_elm_lang$html$Html_Attributes$style(
 				_elm_lang$core$Native_List.fromArray(
 					[
-						{ctor: '_Tuple2', _0: 'justify-content', _1: 'left'},
-						{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
-						{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
+						{ctor: '_Tuple2', _0: 'background-color', _1: 'white'}
 					]))
 			]),
 		_elm_lang$core$Native_List.fromArray(
@@ -9064,48 +9062,140 @@ var _user$project$View$accountDetailView = function (account) {
 				A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
-					[]),
+					[
+						_elm_lang$html$Html_Attributes$class(''),
+						_elm_lang$html$Html_Attributes$style(
+						_elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: 'padding-right', _1: '8%'},
+								{ctor: '_Tuple2', _0: 'padding-left', _1: '8%'},
+								{ctor: '_Tuple2', _0: 'margin', _1: 'auto'},
+								{ctor: '_Tuple2', _0: 'flex-direction', _1: 'column'}
+							]))
+					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$div,
+						_elm_lang$html$Html$h1,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('mdl-textfield--floating-label is-upgraded mdl-js-textfield mdl-textfield')
+								_elm_lang$html$Html_Attributes$class('mdl-color-text--primary')
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A2(
-								_elm_lang$html$Html$textarea,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$autofocus(true),
-										_elm_lang$html$Html_Attributes$maxlength(5),
-										_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
-										_elm_lang$html$Html_Attributes$style(
-										_elm_lang$core$Native_List.fromArray(
-											[
-												{ctor: '_Tuple2', _0: 'outline', _1: 'none'}
-											]))
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[])),
-								A2(
-								_elm_lang$html$Html$label,
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html_Attributes$class('mdl-textfield__label')
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text('Multiline textfield (0 of 5 char limit)')
-									])),
+								_elm_lang$html$Html$text('Edit Details'),
 								A2(
 								_elm_lang$html$Html$div,
 								_elm_lang$core$Native_List.fromArray(
-									[]),
+									[
+										_elm_lang$html$Html_Attributes$class(''),
+										_elm_lang$html$Html_Attributes$style(
+										_elm_lang$core$Native_List.fromArray(
+											[
+												{ctor: '_Tuple2', _0: 'justify-content', _1: 'left'},
+												{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
+												{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
+											]))
+									]),
 								_elm_lang$core$Native_List.fromArray(
-									[]))
+									[
+										A2(
+										_elm_lang$html$Html$div,
+										_elm_lang$core$Native_List.fromArray(
+											[]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												A2(
+												_elm_lang$html$Html$div,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('is-upgraded mdl-js-textfield mdl-textfield')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														A2(
+														_elm_lang$html$Html$input,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$type$('text'),
+																_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
+																_elm_lang$html$Html_Attributes$value(account.fullname),
+																_elm_lang$html$Html_Attributes$style(
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		{ctor: '_Tuple2', _0: 'outline', _1: 'none'}
+																	]))
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[])),
+														A2(
+														_elm_lang$html$Html$label,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('mdl-textfield__label')
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html$text('')
+															])),
+														A2(
+														_elm_lang$html$Html$div,
+														_elm_lang$core$Native_List.fromArray(
+															[]),
+														_elm_lang$core$Native_List.fromArray(
+															[]))
+													])),
+												A2(
+												_elm_lang$html$Html$div,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('is-upgraded mdl-js-textfield mdl-textfield')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														A2(
+														_elm_lang$html$Html$input,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$type$('text'),
+																_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
+																_elm_lang$html$Html_Attributes$style(
+																_elm_lang$core$Native_List.fromArray(
+																	[
+																		{ctor: '_Tuple2', _0: 'outline', _1: 'none'}
+																	]))
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[])),
+														A2(
+														_elm_lang$html$Html$label,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('mdl-textfield__label')
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html$text('')
+															])),
+														A2(
+														_elm_lang$html$Html$div,
+														_elm_lang$core$Native_List.fromArray(
+															[]),
+														_elm_lang$core$Native_List.fromArray(
+															[]))
+													])),
+												A2(
+												_elm_lang$html$Html$button,
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html_Attributes$class('mdl-js-button mdl-button mdl-button--colored mdl-button--raised')
+													]),
+												_elm_lang$core$Native_List.fromArray(
+													[
+														_elm_lang$html$Html$text('Submit')
+													]))
+											]))
+									]))
 							]))
 					]))
 			]));
