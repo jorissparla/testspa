@@ -8708,9 +8708,9 @@ var _user$project$Types$Account = F7(
 	function (a, b, c, d, e, f, g) {
 		return {uic: a, fullname: b, team: c, location: d, region: e, date_changed: f, workload: g};
 	});
-var _user$project$Types$Model = F2(
-	function (a, b) {
-		return {currentpage: a, accounts: b};
+var _user$project$Types$Model = F3(
+	function (a, b, c) {
+		return {currentpage: a, searchText: b, accounts: c};
 	});
 var _user$project$Types$NotFoundPage = {ctor: 'NotFoundPage'};
 var _user$project$Types$AccountDetails = function (a) {
@@ -8724,6 +8724,9 @@ var _user$project$Types$FetchAllFail = function (a) {
 };
 var _user$project$Types$FetchAllDone = function (a) {
 	return {ctor: 'FetchAllDone', _0: a};
+};
+var _user$project$Types$SearchTextEntered = function (a) {
+	return {ctor: 'SearchTextEntered', _0: a};
 };
 var _user$project$Types$NavigatePage = function (a) {
 	return {ctor: 'NavigatePage', _0: a};
@@ -8775,16 +8778,25 @@ var _user$project$State$update = F2(
 						{accounts: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'FetchAllFail':
+				return {
+					ctor: '_Tuple2',
+					_0: {currentpage: model.currentpage, searchText: '', accounts: model.accounts},
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			default:
 				return {
 					ctor: '_Tuple2',
-					_0: {currentpage: model.currentpage, accounts: model.accounts},
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{searchText: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
 	});
 var _user$project$State$initialModel = {
 	currentpage: _user$project$Types$HomePage,
+	searchText: '',
 	accounts: _elm_lang$core$Native_List.fromArray(
 		[])
 };
@@ -9079,8 +9091,70 @@ var _user$project$View$viewAccountDetails = F2(
 		}
 	});
 var _user$project$View$viewAccount = function (account) {
-	return _user$project$View$alternateView(account);
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Events$onClick(
+				_user$project$Types$NavigatePage(
+					_user$project$Types$AccountDetails(account.uic)))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$View$alternateView(account)
+			]));
 };
+var _user$project$View$searchField = A2(
+	_elm_lang$html$Html$div,
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$class('mdl-grid')
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('mdl-cell--1-offset-desktop mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('mdl-textfield mdl-js-textfield')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_elm_lang$html$Html$input,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Events$onInput(_user$project$Types$SearchTextEntered),
+									_elm_lang$html$Html_Attributes$placeholder('Search.'),
+									_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
+									_elm_lang$html$Html_Attributes$id('sample1'),
+									_elm_lang$html$Html_Attributes$type$('text'),
+									_elm_lang$html$Html_Attributes$style(
+									_elm_lang$core$Native_List.fromArray(
+										[
+											{ctor: '_Tuple2', _0: 'left-margin', _1: '30px'}
+										]))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[]))
+						]))
+				]))
+		]));
+var _user$project$View$matchSearch = F2(
+	function (str, account) {
+		var fo = account.location;
+		var fa = account.team;
+		var fi = account.fullname;
+		return A2(_elm_lang$core$String$contains, str, fi) || (A2(_elm_lang$core$String$contains, str, fa) || A2(_elm_lang$core$String$contains, str, fo));
+	});
 var _user$project$View$viewAccounts = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -9115,7 +9189,13 @@ var _user$project$View$viewAccounts = function (model) {
 										{ctor: '_Tuple2', _0: 'display', _1: 'flex'}
 									]))
 							]),
-						A2(_elm_lang$core$List$map, _user$project$View$viewAccount, model.accounts))
+						A2(
+							_elm_lang$core$List$map,
+							_user$project$View$viewAccount,
+							A2(
+								_elm_lang$core$List$filter,
+								_user$project$View$matchSearch(model.searchText),
+								model.accounts)))
 					]))
 			]));
 };
@@ -9177,6 +9257,7 @@ var _user$project$View$view = function (model) {
 								[]),
 							_elm_lang$core$Native_List.fromArray(
 								[
+									_user$project$View$searchField,
 									_user$project$View$viewAccounts(model)
 								]));
 					case 'AccountDetails':

@@ -7,6 +7,7 @@ import Rest exposing (..)
 initialModel : Model
 initialModel =
     { currentpage = HomePage
+    , searchText = ""
     , accounts = []
     }
 
@@ -29,4 +30,7 @@ update msg model =
             ( { model | accounts = newaccounts }, Cmd.none )
 
         FetchAllFail error ->
-            ( { currentpage = model.currentpage, accounts = model.accounts }, Cmd.none )
+            ( { currentpage = model.currentpage, searchText = "", accounts = model.accounts }, Cmd.none )
+
+        SearchTextEntered str ->
+            ( { model | searchText = str }, Cmd.none )

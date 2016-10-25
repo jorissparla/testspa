@@ -17,7 +17,8 @@ view model =
 
             AccountsPage ->
                 div []
-                    [ viewAccounts model
+                    [ searchField
+                    , viewAccounts model
                     ]
 
             AccountDetails accid ->
@@ -41,7 +42,34 @@ viewAccounts model =
     div [ class "mdl-grid" ]
         [ div [ class "mdl-cell mdl-cell--12-col" ]
             [ div [ class "", style [ ( "flex", "1 1 auto" ), ( "max-width", "80%" ), ( "min-width", "256px" ), ( "align-items", "center" ), ( "justify-content", "space-between" ), ( "flex-flow", "row wrap" ), ( "display", "flex" ) ] ]
-                (model.accounts |> List.map viewAccount)
+                (model.accounts |> List.filter (matchSearch model.searchText) |> List.map viewAccount)
+            ]
+        ]
+
+
+matchSearch : String -> Account -> Bool
+matchSearch str account =
+    let
+        fi =
+            account.fullname
+
+        fa =
+            account.team
+
+        fo =
+            account.location
+    in
+        String.contains str fi || String.contains str fa || String.contains str fo
+
+
+searchField =
+    div [ class "mdl-grid" ]
+        [ div [ class "mdl-cell--1-offset-desktop mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell" ]
+            [ div
+                [ class "mdl-textfield mdl-js-textfield" ]
+                [ input [ onInput SearchTextEntered, placeholder "Search.", class "mdl-textfield__input", id "sample1", type' "text", style [ ( "left-margin", "30px" ) ] ]
+                    []
+                ]
             ]
         ]
 

@@ -35,12 +35,14 @@ type alias Account =
 
 type alias Model =
     { currentpage : Page
+    , searchText : String
     , accounts : List Account
     }
 
 
 type Msg
     = NavigatePage Page
+    | SearchTextEntered String
     | FetchAllDone (List Account)
     | FetchAllFail Http.Error
     | NoMsg
