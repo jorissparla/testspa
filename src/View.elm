@@ -22,8 +22,8 @@ view model =
 
             AccountDetails accid ->
                 div []
-                    [ text ("Account List Page" ++ toString accid)
-                    , viewAccountDetails accid model
+                    [ text ("Account List Page" ++ accid)
+                    , viewAccountDetails accid model.accounts
                     ]
 
             NotFoundPage ->
@@ -49,13 +49,14 @@ viewAccounts model =
 
 viewAccount : Account -> Html Msg
 viewAccount account =
-    li [ onClick (NavigatePage (AccountDetails account.id)) ] [ text account.name ]
+    li [ onClick (NavigatePage (AccountDetails account.uic)) ] [ text account.fullname ]
 
 
-viewAccountDetails accid model =
+viewAccountDetails : String -> List Account -> Html Msg
+viewAccountDetails accid accounts =
     let
         account =
-            (model.accounts |> List.filter (matchId accid) |> List.head)
+            (accounts |> List.filter (matchId accid) |> List.head)
     in
         case account of
             Nothing ->
@@ -64,8 +65,8 @@ viewAccountDetails accid model =
             Just account ->
                 div []
                     [ h2 []
-                        [ text ("Account" ++ account.name)
-                        , div [] [ text (toString account.id) ]
+                        [ text ("Account" ++ account.fullname)
+                        , div [] [ text account.uic ]
                         ]
                     ]
 
@@ -73,11 +74,11 @@ viewAccountDetails accid model =
 vac account =
     div []
         [ h2 []
-            [ text ("Account" ++ account.name)
-            , div [] [ text account.id ]
+            [ text ("Account" ++ account.fullname)
+            , div [] [ text account.uic ]
             ]
         ]
 
 
 matchId accid account =
-    (accid == account.id)
+    (accid == account.uic)

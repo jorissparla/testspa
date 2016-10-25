@@ -1,5 +1,7 @@
 module Types exposing (..)
 
+import Http
+
 
 type Page
     = HomePage
@@ -9,16 +11,18 @@ type Page
 
 
 type alias AccountID =
-    Int
+    String
+
+
+
+{- type alias Account =
+   { id : AccountID
+   , name : String
+   }
+-}
 
 
 type alias Account =
-    { id : AccountID
-    , name : String
-    }
-
-
-type alias Account0 =
     { uic : String
     , fullname : String
     , team : String
@@ -37,4 +41,6 @@ type alias Model =
 
 type Msg
     = NavigatePage Page
+    | FetchAllDone (List Account)
+    | FetchAllFail Http.Error
     | NoMsg

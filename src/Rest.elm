@@ -6,10 +6,10 @@ import Task
 import Types exposing (..)
 
 
-decodeAccountItem : Decoder Account0
+decodeAccountItem : Decoder Account
 decodeAccountItem =
     object7
-        Account0
+        Account
         ("uic" := string)
         ("fullname" := string)
         ("team" := string)
@@ -19,17 +19,18 @@ decodeAccountItem =
         ("workload" := int)
 
 
-decodeAccount : Decoder (List Account0)
+decodeAccount : Decoder (List Account)
 decodeAccount =
     (list decodeAccountItem)
 
 
+getAccounts =
+    Http.get decodeAccount accountendpoint
+        |> Task.perform FetchAllFail FetchAllDone
 
-{- getAccounts =
-   Http.get decodeAccount accountendpoint
-       |> Task.perform Failed Succeed
-       |> Cmd.map GetAccountResponse
--}
+
+
+--  |> Cmd.map GetAccountResponse
 
 
 accountendpoint =
