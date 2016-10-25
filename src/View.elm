@@ -48,8 +48,9 @@ viewAccounts model =
 
 viewAccount : Account -> Html Msg
 viewAccount account =
-    -- li [ onClick (NavigatePage (AccountDetails account.uic)) ] [ text account.fullname ]
-    alternateView account
+    div [ onClick (NavigatePage (AccountDetails account.uic)) ]
+        [ alternateView account
+        ]
 
 
 viewAccountDetails : String -> List Account -> Html Msg
