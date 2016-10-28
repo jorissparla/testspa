@@ -1,36 +1,82 @@
 module State exposing (..)
 
 import Types exposing (..)
-import Rest exposing (..)
+import Account.Rest exposing (..)
+import Account.State exposing (..)
 
 
-initialModel : Model
-initialModel =
-    { currentpage = HomePage
-    , searchText = ""
-    , accounts = []
+initAccount =
+    { uic = ""
+    , fullname = ""
+    , team = ""
+    , location = ""
+    , region = ""
+    , date_changed = ""
+    , workload = 0
     }
 
 
-init : ( Model, Cmd Msg )
+initialModel : Types.Model
+initialModel =
+    { currentpage = AccountsPage
+    , accountmodel = Account.State.initialModel
+    }
+
+
+init : ( Types.Model, Cmd Msg )
 init =
-    ( initialModel, getAccounts )
+    ( initialModel, Cmd.map AccountMsg' getAccounts )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoMsg ->
-            ( { model | currentpage = HomePage }, Cmd.none )
-
+        {- EditAccount account ->
+           ( { model | currentaccount = account }, Cmd.none )
+        -}
         NavigatePage page ->
             ( { model | currentpage = page }, Cmd.none )
 
-        FetchAllDone newaccounts ->
-            ( { model | accounts = newaccounts }, Cmd.none )
+        AccountMsg' msg ->
+            case msg of
+                EditAccount account ->
+                    ( { model | accountmodel = (updateModelAccount account model.accountmodel) }, Cmd.none )
 
-        FetchAllFail error ->
-            ( { currentpage = model.currentpage, searchText = "", accounts = model.accounts }, Cmd.none )
+                FetchAllDone newaccounts ->
+                    ( { model | accountmodel = (updateModelAccounts newaccounts model.accountmodel) }, Cmd.none )
 
-        SearchTextEntered str ->
-            ( { model | searchText = str }, Cmd.none )
+                FetchAllFail error ->
+                    ( { model | accountmodel = (updateModelSearchText "" model.accountmodel) }, Cmd.none )
+
+                SearchTextEntered str ->
+                    ( { model | accountmodel = (updateModelSearchText str model.accountmodel) }, Cmd.none )
+
+
+
+--pdateModelAccount : AccountModel -> Account -> AccountModel
+
+
+updateModelSearchText str accountmodel =
+    { accountmodel | searchText = str }
+
+
+updateModelAccounts accounts accountmodel =
+    { accountmodel | accounts = accounts }
+
+
+updateModelAccount account accountmodel =
+    { accountmodel | currentaccount = account }
+
+
+
+--Account.State.update msg model.accountmodel
+{-
+   FetchAllDone newaccounts ->
+       ( { model | accounts = newaccounts }, Cmd.none )
+
+   FetchAllFail error ->
+       ( { currentpage = model.currentpage, searchText = "", accounts = model.accounts, currentaccount = initAccount }, Cmd.none )
+
+   SearchTextEntered str ->
+       ( { model | searchText = str }, Cmd.none )
+-}

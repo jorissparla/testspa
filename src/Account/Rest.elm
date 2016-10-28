@@ -1,4 +1,4 @@
-module Rest exposing (..)
+module Account.Rest exposing (..)
 
 import Http
 import Json.Decode exposing (..)
@@ -24,6 +24,7 @@ decodeAccount =
     (list decodeAccountItem)
 
 
+getAccounts : Cmd AccountMsg
 getAccounts =
     Http.get decodeAccount accountendpoint
         |> Task.perform FetchAllFail FetchAllDone
@@ -34,4 +35,5 @@ getAccounts =
 
 
 accountendpoint =
-    "http://nlbavwtls22:3000/api/accounts"
+    --"http://nlbavwtls22:3000/api/accounts"
+    "http://localhost:3000/api/accounts"

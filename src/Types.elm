@@ -4,22 +4,31 @@ import Http
 
 
 type Page
-    = HomePage
-    | AccountsPage
+    = AccountsPage
     | AccountDetails AccountID
     | NotFoundPage
+
+
+type alias Model =
+    { currentpage : Page
+    , accountmodel : AccountModel
+    }
 
 
 type alias AccountID =
     String
 
 
+type Msg
+    = NavigatePage Page
+    | AccountMsg' AccountMsg
 
-{- type alias Account =
-   { id : AccountID
-   , name : String
-   }
--}
+
+type AccountMsg
+    = SearchTextEntered String
+    | EditAccount Account
+    | FetchAllDone (List Account)
+    | FetchAllFail Http.Error
 
 
 type alias Account =
@@ -33,16 +42,8 @@ type alias Account =
     }
 
 
-type alias Model =
-    { currentpage : Page
-    , searchText : String
+type alias AccountModel =
+    { searchText : String
     , accounts : List Account
+    , currentaccount : Account
     }
-
-
-type Msg
-    = NavigatePage Page
-    | SearchTextEntered String
-    | FetchAllDone (List Account)
-    | FetchAllFail Http.Error
-    | NoMsg

@@ -3,7 +3,10 @@ module App exposing (..)
 import Html.App exposing (..)
 import Types exposing (..)
 import State exposing (..)
-import View exposing (view)
+import View exposing (..)
+
+
+--import Account.State exposing (update)
 
 
 main : Program Never
@@ -11,7 +14,7 @@ main =
     Html.App.program
         { init = init
         , update = update
-        , view = view
+        , view = View.view
         , subscriptions = subscriptions
         }
 
