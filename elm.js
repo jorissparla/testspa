@@ -8782,8 +8782,8 @@ var _user$project$Account_State$initialModel = {
 	currentaccount: _user$project$Account_State$initAccount
 };
 
-var _user$project$Account_View$editField = F2(
-	function (str, ph) {
+var _user$project$Account_View$editField = F3(
+	function (str, ph, msg) {
 		return A2(
 			_elm_lang$html$Html$div,
 			_elm_lang$core$Native_List.fromArray(
@@ -8799,12 +8799,12 @@ var _user$project$Account_View$editField = F2(
 							_elm_lang$html$Html_Events$onInput(
 							function (_p0) {
 								return _user$project$Types$FieldChange$(
-									_user$project$Types$FullName(_p0));
+									msg(_p0));
 							}),
 							_elm_lang$html$Html_Attributes$type$('text'),
 							_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
-							_elm_lang$html$Html_Attributes$value(str),
-							_elm_lang$html$Html_Attributes$placeholder('bla'),
+							_elm_lang$html$Html_Attributes$defaultValue(str),
+							_elm_lang$html$Html_Attributes$placeholder(ph),
 							_elm_lang$html$Html_Attributes$style(
 							_elm_lang$core$Native_List.fromArray(
 								[
@@ -9140,11 +9140,11 @@ var _user$project$Account_View$accountDetailView = function (account) {
 													[]),
 												_elm_lang$core$Native_List.fromArray(
 													[
-														A2(_user$project$Account_View$editField, account.fullname, 'FullName'),
-														A2(_user$project$Account_View$editField, account.email, 'Email'),
-														A2(_user$project$Account_View$editField, account.team, 'Team'),
-														A2(_user$project$Account_View$editField, account.region, 'Region'),
-														A2(_user$project$Account_View$editField, account.location, 'Location'),
+														A3(_user$project$Account_View$editField, account.fullname, 'FullName', _user$project$Types$FullName),
+														A3(_user$project$Account_View$editField, account.email, 'Email', _user$project$Types$Email),
+														A3(_user$project$Account_View$editField, account.team, 'Team', _user$project$Types$Team),
+														A3(_user$project$Account_View$editField, account.region, 'Region', _user$project$Types$Region),
+														A3(_user$project$Account_View$editField, account.location, 'Location', _user$project$Types$Location),
 														A2(
 														_elm_lang$html$Html$div,
 														_elm_lang$core$Native_List.fromArray(
@@ -9352,7 +9352,87 @@ var _user$project$State$updateModelSearchText = F2(
 			accountmodel,
 			{searchText: str});
 	});
-var _user$project$State$updateNameChange2 = F2(
+var _user$project$State$updateLocation = F2(
+	function (str, model) {
+		var accountmodel = model.accountmodel;
+		var currentaccount = accountmodel.currentaccount;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				accountmodel: _elm_lang$core$Native_Utils.update(
+					accountmodel,
+					{
+						currentaccount: _elm_lang$core$Native_Utils.update(
+							currentaccount,
+							{location: str})
+					})
+			});
+	});
+var _user$project$State$updateTeam = F2(
+	function (str, model) {
+		var accountmodel = model.accountmodel;
+		var currentaccount = accountmodel.currentaccount;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				accountmodel: _elm_lang$core$Native_Utils.update(
+					accountmodel,
+					{
+						currentaccount: _elm_lang$core$Native_Utils.update(
+							currentaccount,
+							{team: str})
+					})
+			});
+	});
+var _user$project$State$updateRegion = F2(
+	function (str, model) {
+		var accountmodel = model.accountmodel;
+		var currentaccount = accountmodel.currentaccount;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				accountmodel: _elm_lang$core$Native_Utils.update(
+					accountmodel,
+					{
+						currentaccount: _elm_lang$core$Native_Utils.update(
+							currentaccount,
+							{region: str})
+					})
+			});
+	});
+var _user$project$State$updateEmail = F2(
+	function (str, model) {
+		var accountmodel = model.accountmodel;
+		var currentaccount = accountmodel.currentaccount;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				accountmodel: _elm_lang$core$Native_Utils.update(
+					accountmodel,
+					{
+						currentaccount: _elm_lang$core$Native_Utils.update(
+							currentaccount,
+							{email: str})
+					})
+			});
+	});
+var _user$project$State$updateFullName = F2(
+	function (str, model) {
+		var accountmodel = model.accountmodel;
+		var currentaccount = accountmodel.currentaccount;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				accountmodel: _elm_lang$core$Native_Utils.update(
+					accountmodel,
+					{
+						currentaccount: _elm_lang$core$Native_Utils.update(
+							currentaccount,
+							{fullname: str})
+					})
+			});
+	});
+var _user$project$State$updateNameChange = F2(
 	function (str, model) {
 		var accountmodel = model.accountmodel;
 		var currentaccount = accountmodel.currentaccount;
@@ -9426,31 +9506,31 @@ var _user$project$State$update = F2(
 					case 'FullName':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_0: A2(_user$project$State$updateNameChange, _p1._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Email':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_0: A2(_user$project$State$updateEmail, _p1._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Region':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_0: A2(_user$project$State$updateRegion, _p1._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Team':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_0: A2(_user$project$State$updateTeam, _p1._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_0: A2(_user$project$State$updateLocation, _p1._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}

@@ -52,23 +52,23 @@ update msg model =
         FieldChange' sub ->
             case Debug.log "Sub" sub of
                 FullName str ->
-                    ( updateNameChange2 str model, Cmd.none )
+                    ( updateNameChange str model, Cmd.none )
 
                 Email str ->
-                    ( updateNameChange2 str model, Cmd.none )
+                    ( updateEmail str model, Cmd.none )
 
                 Region str ->
-                    ( updateNameChange2 str model, Cmd.none )
+                    ( updateRegion str model, Cmd.none )
 
                 Team str ->
-                    ( updateNameChange2 str model, Cmd.none )
+                    ( updateTeam str model, Cmd.none )
 
                 Location str ->
-                    ( updateNameChange2 str model, Cmd.none )
+                    ( updateLocation str model, Cmd.none )
 
 
-updateNameChange2 : String -> Model -> Model
-updateNameChange2 str model =
+updateNameChange : String -> Model -> Model
+updateNameChange str model =
     let
         accountmodel =
             model.accountmodel
@@ -82,6 +82,106 @@ updateNameChange2 str model =
                     | currentaccount =
                         { currentaccount
                             | fullname = str
+                        }
+                }
+        }
+
+
+updateFullName : String -> Model -> Model
+updateFullName str model =
+    let
+        accountmodel =
+            model.accountmodel
+
+        currentaccount =
+            accountmodel.currentaccount
+    in
+        { model
+            | accountmodel =
+                { accountmodel
+                    | currentaccount =
+                        { currentaccount
+                            | fullname = str
+                        }
+                }
+        }
+
+
+updateEmail : String -> Model -> Model
+updateEmail str model =
+    let
+        accountmodel =
+            model.accountmodel
+
+        currentaccount =
+            accountmodel.currentaccount
+    in
+        { model
+            | accountmodel =
+                { accountmodel
+                    | currentaccount =
+                        { currentaccount
+                            | email = str
+                        }
+                }
+        }
+
+
+updateRegion : String -> Model -> Model
+updateRegion str model =
+    let
+        accountmodel =
+            model.accountmodel
+
+        currentaccount =
+            accountmodel.currentaccount
+    in
+        { model
+            | accountmodel =
+                { accountmodel
+                    | currentaccount =
+                        { currentaccount
+                            | region = str
+                        }
+                }
+        }
+
+
+updateTeam : String -> Model -> Model
+updateTeam str model =
+    let
+        accountmodel =
+            model.accountmodel
+
+        currentaccount =
+            accountmodel.currentaccount
+    in
+        { model
+            | accountmodel =
+                { accountmodel
+                    | currentaccount =
+                        { currentaccount
+                            | team = str
+                        }
+                }
+        }
+
+
+updateLocation : String -> Model -> Model
+updateLocation str model =
+    let
+        accountmodel =
+            model.accountmodel
+
+        currentaccount =
+            accountmodel.currentaccount
+    in
+        { model
+            | accountmodel =
+                { accountmodel
+                    | currentaccount =
+                        { currentaccount
+                            | location = str
                         }
                 }
         }

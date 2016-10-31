@@ -75,11 +75,11 @@ accountDetailView account =
                     [ text "Edit Details"
                     , div [ class "", style [ ( "justify-content", "left" ), ( "align-items", "center" ), ( "display", "flex" ) ] ]
                         [ div []
-                            [ editField account.fullname "FullName"
-                            , editField account.email "Email"
-                            , editField account.team "Team"
-                            , editField account.region "Region"
-                            , editField account.location "Location"
+                            [ editField account.fullname "FullName" FullName
+                            , editField account.email "Email" Email
+                            , editField account.team "Team" Team
+                            , editField account.region "Region" Region
+                            , editField account.location "Location" Location
                             , div [ class "is-upgraded mdl-js-textfield mdl-textfield" ]
                                 [ input [ type' "text", class "mdl-textfield__input", style [ ( "outline", "none" ) ] ]
                                     []
@@ -175,13 +175,10 @@ alternateView accounts =
         ]
 
 
-
---editField : String -> String -> Html Msg
-
-
-editField str ph =
+editField : String -> String -> (String -> FieldChange) -> Html Msg
+editField str ph msg =
     div [ class "is-upgraded mdl-js-textfield mdl-textfield" ]
-        [ input [ onInput <| FieldChange' << FullName, type' "text", class "mdl-textfield__input", value str, placeholder "bla", style [ ( "outline", "none" ) ] ]
+        [ input [ onInput <| FieldChange' << msg, type' "text", class "mdl-textfield__input", defaultValue str, placeholder ph, style [ ( "outline", "none" ) ] ]
             []
         , label [ class "mdl-textfield__label" ]
             [ text "" ]
