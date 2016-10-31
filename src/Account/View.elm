@@ -32,13 +32,13 @@ matchSearch str account =
         String.contains str fi || String.contains str fa || String.contains str fo
 
 
-searchField : Html AccountMsg
+searchField : Html Msg
 searchField =
     div [ class "mdl-grid" ]
         [ div [ class "mdl-cell--1-offset-desktop mdl-cell--3-col-desktop mdl-cell--8-col-tablet mdl-cell" ]
             [ div
                 [ class "mdl-textfield mdl-js-textfield" ]
-                [ input [ onInput Types.SearchTextEntered, placeholder "Search.", class "mdl-textfield__input", id "sample1", type' "text", style [ ( "left-margin", "30px" ) ] ]
+                [ input [ onInput SearchTextEntered, placeholder "Search.", class "mdl-textfield__input", id "sample1", type' "text", style [ ( "left-margin", "30px" ) ] ]
                     []
                 ]
             ]
@@ -75,14 +75,11 @@ accountDetailView account =
                     [ text "Edit Details"
                     , div [ class "", style [ ( "justify-content", "left" ), ( "align-items", "center" ), ( "display", "flex" ) ] ]
                         [ div []
-                            [ div [ class "is-upgraded mdl-js-textfield mdl-textfield" ]
-                                [ input [ type' "text", class "mdl-textfield__input", value account.fullname, style [ ( "outline", "none" ) ] ]
-                                    []
-                                , label [ class "mdl-textfield__label" ]
-                                    [ text "" ]
-                                , div []
-                                    []
-                                ]
+                            [ editField account.fullname "FullName"
+                            , editField account.email "Email"
+                            , editField account.team "Team"
+                            , editField account.region "Region"
+                            , editField account.location "Location"
                             , div [ class "is-upgraded mdl-js-textfield mdl-textfield" ]
                                 [ input [ type' "text", class "mdl-textfield__input", style [ ( "outline", "none" ) ] ]
                                     []
@@ -178,42 +175,16 @@ alternateView accounts =
         ]
 
 
-optionList =
-    div [ class "is-visible is-upgraded mdl-menu__container", style [ ( "bottom", "32px" ), ( "right", "0px" ), ( "height", "209px" ), ( "width", "133px" ) ] ]
-        [ div [ class "mdl-menu--top-right mdl-menu__outline", style [ ( "height", "209px" ), ( "width", "133px" ) ] ]
+
+--editField : String -> String -> Html Msg
+
+
+editField str ph =
+    div [ class "is-upgraded mdl-js-textfield mdl-textfield" ]
+        [ input [ onInput <| FieldChange' << FullName, type' "text", class "mdl-textfield__input", value str, placeholder "bla", style [ ( "outline", "none" ) ] ]
             []
-        , ul [ class "mdl-menu--top-right mdl-js-menu mdl-menu", style [ ( "clip", "rect(0px 133px 209px 0px)" ) ] ]
-            [ li [ class "mdl-js-ripple-effect mdl-menu__item", style [ ( "align-items", "center" ), ( "display", "flex" ), ( "padding-right", "24px" ), ( "transition-delay", "0.175694s" ) ] ]
-                [ i [ class "material-icons", style [ ( "width", "40px" ) ] ]
-                    [ text "remove_red_eye" ]
-                , span [ class "mdl-menu__item-ripple-container" ]
-                    [ span [ class "mdl-ripple is-animating", style [ ( "width", "285px" ), ( "height", "285px" ), ( "transform", "translate(-50%, -50%) translate(62px, 18px)" ) ] ]
-                        []
-                    ]
-                ]
-            , li [ class "mdl-js-ripple-effect mdl-menu__item", style [ ( "align-items", "center" ), ( "display", "flex" ), ( "padding-right", "24px" ), ( "transition-delay", "0.120574s" ) ] ]
-                [ i [ class "material-icons", style [ ( "width", "40px" ) ] ]
-                    [ text "person_add" ]
-                , span [ class "mdl-menu__item-ripple-container" ]
-                    [ span [ class "mdl-ripple is-animating" ]
-                        []
-                    ]
-                ]
-            , li [ class "mdl-menu__item--full-bleed-divider mdl-js-ripple-effect mdl-menu__item", style [ ( "align-items", "center" ), ( "display", "flex" ), ( "padding-right", "24px" ), ( "transition-delay", "0.0643062s" ) ] ]
-                [ i [ class "material-icons", style [ ( "width", "40px" ) ] ]
-                    [ text "link" ]
-                , span [ class "mdl-menu__item-ripple-container" ]
-                    [ span [ class "mdl-ripple is-animating" ]
-                        []
-                    ]
-                ]
-            , li [ class "mdl-js-ripple-effect mdl-menu__item", style [ ( "align-items", "center" ), ( "display", "flex" ), ( "padding-right", "24px" ), ( "transition-delay", "0.0091866s" ) ] ]
-                [ i [ class "material-icons", style [ ( "width", "40px" ) ] ]
-                    [ text "delete" ]
-                , span [ class "mdl-menu__item-ripple-container" ]
-                    [ span [ class "mdl-ripple is-animating" ]
-                        []
-                    ]
-                ]
-            ]
+        , label [ class "mdl-textfield__label" ]
+            [ text "" ]
+        , div []
+            []
         ]

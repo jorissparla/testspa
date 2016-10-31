@@ -8,10 +8,11 @@ import Types exposing (..)
 
 decodeAccountItem : Decoder Account
 decodeAccountItem =
-    object7
+    object8
         Account
         ("uic" := string)
         ("fullname" := string)
+        ("email" := string)
         ("team" := string)
         ("location" := string)
         ("region" := string)
@@ -24,7 +25,7 @@ decodeAccount =
     (list decodeAccountItem)
 
 
-getAccounts : Cmd AccountMsg
+getAccounts : Cmd Msg
 getAccounts =
     Http.get decodeAccount accountendpoint
         |> Task.perform FetchAllFail FetchAllDone

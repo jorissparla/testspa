@@ -21,19 +21,34 @@ type alias AccountID =
 
 type Msg
     = NavigatePage Page
-    | AccountMsg' AccountMsg
-
-
-type AccountMsg
-    = SearchTextEntered String
+    | SearchTextEntered String
     | EditAccount Account
     | FetchAllDone (List Account)
     | FetchAllFail Http.Error
+    | FieldChange' FieldChange
+
+
+type FieldChange
+    = FullName String
+    | Email String
+    | Region String
+    | Location String
+    | Team String
+
+
+
+{- type AccountMsg
+   = SearchTextEntered String
+   | EditAccount Account
+   | FetchAllDone (List Account)
+   | FetchAllFail Http.Error
+-}
 
 
 type alias Account =
     { uic : String
     , fullname : String
+    , email : String
     , team : String
     , location : String
     , region : String

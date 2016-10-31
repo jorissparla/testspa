@@ -32,7 +32,10 @@ view model =
         ]
 
 
-viewHeader : Model -> Html Msg
+
+--viewHeader : Model -> Html Msg
+
+
 viewHeader model =
     div [] []
 

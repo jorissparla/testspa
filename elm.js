@@ -8708,9 +8708,9 @@ var _user$project$Types$Model = F2(
 	function (a, b) {
 		return {currentpage: a, accountmodel: b};
 	});
-var _user$project$Types$Account = F7(
-	function (a, b, c, d, e, f, g) {
-		return {uic: a, fullname: b, team: c, location: d, region: e, date_changed: f, workload: g};
+var _user$project$Types$Account = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {uic: a, fullname: b, email: c, team: d, location: e, region: f, date_changed: g, workload: h};
 	});
 var _user$project$Types$AccountModel = F3(
 	function (a, b, c) {
@@ -8721,11 +8721,8 @@ var _user$project$Types$AccountDetails = function (a) {
 	return {ctor: 'AccountDetails', _0: a};
 };
 var _user$project$Types$AccountsPage = {ctor: 'AccountsPage'};
-var _user$project$Types$AccountMsg$ = function (a) {
-	return {ctor: 'AccountMsg\'', _0: a};
-};
-var _user$project$Types$NavigatePage = function (a) {
-	return {ctor: 'NavigatePage', _0: a};
+var _user$project$Types$FieldChange$ = function (a) {
+	return {ctor: 'FieldChange\'', _0: a};
 };
 var _user$project$Types$FetchAllFail = function (a) {
 	return {ctor: 'FetchAllFail', _0: a};
@@ -8739,13 +8736,32 @@ var _user$project$Types$EditAccount = function (a) {
 var _user$project$Types$SearchTextEntered = function (a) {
 	return {ctor: 'SearchTextEntered', _0: a};
 };
+var _user$project$Types$NavigatePage = function (a) {
+	return {ctor: 'NavigatePage', _0: a};
+};
+var _user$project$Types$Team = function (a) {
+	return {ctor: 'Team', _0: a};
+};
+var _user$project$Types$Location = function (a) {
+	return {ctor: 'Location', _0: a};
+};
+var _user$project$Types$Region = function (a) {
+	return {ctor: 'Region', _0: a};
+};
+var _user$project$Types$Email = function (a) {
+	return {ctor: 'Email', _0: a};
+};
+var _user$project$Types$FullName = function (a) {
+	return {ctor: 'FullName', _0: a};
+};
 
 var _user$project$Account_Rest$accountendpoint = 'http://localhost:3000/api/accounts';
-var _user$project$Account_Rest$decodeAccountItem = A8(
-	_elm_lang$core$Json_Decode$object7,
+var _user$project$Account_Rest$decodeAccountItem = A9(
+	_elm_lang$core$Json_Decode$object8,
 	_user$project$Types$Account,
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'uic', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'fullname', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'email', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'team', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'location', _elm_lang$core$Json_Decode$string),
 	A2(_elm_lang$core$Json_Decode_ops[':='], 'region', _elm_lang$core$Json_Decode$string),
@@ -8758,304 +8774,69 @@ var _user$project$Account_Rest$getAccounts = A3(
 	_user$project$Types$FetchAllDone,
 	A2(_evancz$elm_http$Http$get, _user$project$Account_Rest$decodeAccount, _user$project$Account_Rest$accountendpoint));
 
-var _user$project$Account_State$initAccount = {uic: '', fullname: '', team: '', location: '', region: '', date_changed: '', workload: 0};
+var _user$project$Account_State$initAccount = {uic: '', fullname: '', email: '', team: '', location: '', region: '', date_changed: '', workload: 0};
 var _user$project$Account_State$initialModel = {
 	searchText: '',
 	accounts: _elm_lang$core$Native_List.fromArray(
 		[]),
 	currentaccount: _user$project$Account_State$initAccount
 };
-var _user$project$Account_State$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'EditAccount':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{currentaccount: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'FetchAllDone':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{accounts: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'FetchAllFail':
-				return {
-					ctor: '_Tuple2',
-					_0: {searchText: '', accounts: model.accounts, currentaccount: _user$project$Account_State$initAccount},
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{searchText: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-		}
-	});
 
-var _user$project$Account_View$optionList = A2(
-	_elm_lang$html$Html$div,
-	_elm_lang$core$Native_List.fromArray(
-		[
-			_elm_lang$html$Html_Attributes$class('is-visible is-upgraded mdl-menu__container'),
-			_elm_lang$html$Html_Attributes$style(
-			_elm_lang$core$Native_List.fromArray(
-				[
-					{ctor: '_Tuple2', _0: 'bottom', _1: '32px'},
-					{ctor: '_Tuple2', _0: 'right', _1: '0px'},
-					{ctor: '_Tuple2', _0: 'height', _1: '209px'},
-					{ctor: '_Tuple2', _0: 'width', _1: '133px'}
-				]))
-		]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
+var _user$project$Account_View$editField = F2(
+	function (str, ph) {
+		return A2(
 			_elm_lang$html$Html$div,
 			_elm_lang$core$Native_List.fromArray(
 				[
-					_elm_lang$html$Html_Attributes$class('mdl-menu--top-right mdl-menu__outline'),
-					_elm_lang$html$Html_Attributes$style(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'height', _1: '209px'},
-							{ctor: '_Tuple2', _0: 'width', _1: '133px'}
-						]))
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[])),
-			A2(
-			_elm_lang$html$Html$ul,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('mdl-menu--top-right mdl-js-menu mdl-menu'),
-					_elm_lang$html$Html_Attributes$style(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'clip', _1: 'rect(0px 133px 209px 0px)'}
-						]))
+					_elm_lang$html$Html_Attributes$class('is-upgraded mdl-js-textfield mdl-textfield')
 				]),
 			_elm_lang$core$Native_List.fromArray(
 				[
 					A2(
-					_elm_lang$html$Html$li,
+					_elm_lang$html$Html$input,
 					_elm_lang$core$Native_List.fromArray(
 						[
-							_elm_lang$html$Html_Attributes$class('mdl-js-ripple-effect mdl-menu__item'),
+							_elm_lang$html$Html_Events$onInput(
+							function (_p0) {
+								return _user$project$Types$FieldChange$(
+									_user$project$Types$FullName(_p0));
+							}),
+							_elm_lang$html$Html_Attributes$type$('text'),
+							_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
+							_elm_lang$html$Html_Attributes$value(str),
+							_elm_lang$html$Html_Attributes$placeholder('bla'),
 							_elm_lang$html$Html_Attributes$style(
 							_elm_lang$core$Native_List.fromArray(
 								[
-									{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
-									{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
-									{ctor: '_Tuple2', _0: 'padding-right', _1: '24px'},
-									{ctor: '_Tuple2', _0: 'transition-delay', _1: '0.175694s'}
+									{ctor: '_Tuple2', _0: 'outline', _1: 'none'}
 								]))
 						]),
 					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$label,
+					_elm_lang$core$Native_List.fromArray(
 						[
-							A2(
-							_elm_lang$html$Html$i,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('material-icons'),
-									_elm_lang$html$Html_Attributes$style(
-									_elm_lang$core$Native_List.fromArray(
-										[
-											{ctor: '_Tuple2', _0: 'width', _1: '40px'}
-										]))
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text('remove_red_eye')
-								])),
-							A2(
-							_elm_lang$html$Html$span,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('mdl-menu__item-ripple-container')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_elm_lang$html$Html$span,
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html_Attributes$class('mdl-ripple is-animating'),
-											_elm_lang$html$Html_Attributes$style(
-											_elm_lang$core$Native_List.fromArray(
-												[
-													{ctor: '_Tuple2', _0: 'width', _1: '285px'},
-													{ctor: '_Tuple2', _0: 'height', _1: '285px'},
-													{ctor: '_Tuple2', _0: 'transform', _1: 'translate(-50%, -50%) translate(62px, 18px)'}
-												]))
-										]),
-									_elm_lang$core$Native_List.fromArray(
-										[]))
-								]))
+							_elm_lang$html$Html_Attributes$class('mdl-textfield__label')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('')
 						])),
 					A2(
-					_elm_lang$html$Html$li,
+					_elm_lang$html$Html$div,
 					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('mdl-js-ripple-effect mdl-menu__item'),
-							_elm_lang$html$Html_Attributes$style(
-							_elm_lang$core$Native_List.fromArray(
-								[
-									{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
-									{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
-									{ctor: '_Tuple2', _0: 'padding-right', _1: '24px'},
-									{ctor: '_Tuple2', _0: 'transition-delay', _1: '0.120574s'}
-								]))
-						]),
+						[]),
 					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$html$Html$i,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('material-icons'),
-									_elm_lang$html$Html_Attributes$style(
-									_elm_lang$core$Native_List.fromArray(
-										[
-											{ctor: '_Tuple2', _0: 'width', _1: '40px'}
-										]))
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text('person_add')
-								])),
-							A2(
-							_elm_lang$html$Html$span,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('mdl-menu__item-ripple-container')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_elm_lang$html$Html$span,
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html_Attributes$class('mdl-ripple is-animating')
-										]),
-									_elm_lang$core$Native_List.fromArray(
-										[]))
-								]))
-						])),
-					A2(
-					_elm_lang$html$Html$li,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('mdl-menu__item--full-bleed-divider mdl-js-ripple-effect mdl-menu__item'),
-							_elm_lang$html$Html_Attributes$style(
-							_elm_lang$core$Native_List.fromArray(
-								[
-									{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
-									{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
-									{ctor: '_Tuple2', _0: 'padding-right', _1: '24px'},
-									{ctor: '_Tuple2', _0: 'transition-delay', _1: '0.0643062s'}
-								]))
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$html$Html$i,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('material-icons'),
-									_elm_lang$html$Html_Attributes$style(
-									_elm_lang$core$Native_List.fromArray(
-										[
-											{ctor: '_Tuple2', _0: 'width', _1: '40px'}
-										]))
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text('link')
-								])),
-							A2(
-							_elm_lang$html$Html$span,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('mdl-menu__item-ripple-container')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_elm_lang$html$Html$span,
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html_Attributes$class('mdl-ripple is-animating')
-										]),
-									_elm_lang$core$Native_List.fromArray(
-										[]))
-								]))
-						])),
-					A2(
-					_elm_lang$html$Html$li,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('mdl-js-ripple-effect mdl-menu__item'),
-							_elm_lang$html$Html_Attributes$style(
-							_elm_lang$core$Native_List.fromArray(
-								[
-									{ctor: '_Tuple2', _0: 'align-items', _1: 'center'},
-									{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
-									{ctor: '_Tuple2', _0: 'padding-right', _1: '24px'},
-									{ctor: '_Tuple2', _0: 'transition-delay', _1: '0.0091866s'}
-								]))
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$html$Html$i,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('material-icons'),
-									_elm_lang$html$Html_Attributes$style(
-									_elm_lang$core$Native_List.fromArray(
-										[
-											{ctor: '_Tuple2', _0: 'width', _1: '40px'}
-										]))
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text('delete')
-								])),
-							A2(
-							_elm_lang$html$Html$span,
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html_Attributes$class('mdl-menu__item-ripple-container')
-								]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									A2(
-									_elm_lang$html$Html$span,
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html_Attributes$class('mdl-ripple is-animating')
-										]),
-									_elm_lang$core$Native_List.fromArray(
-										[]))
-								]))
-						]))
-				]))
-		]));
+						[]))
+				]));
+	});
 var _user$project$Account_View$getTeam = function (team) {
 	return _elm_lang$core$String$isEmpty(team) ? 'No Team entered' : team;
 };
 var _user$project$Account_View$regionColor = function (region) {
-	var _p0 = region;
-	switch (_p0) {
+	var _p1 = region;
+	switch (_p1) {
 		case 'EMEA':
 			return 'mdl-card mdl-color--light-blue-400 mdl-shadow--2dp';
 		case 'NA':
@@ -9359,46 +9140,11 @@ var _user$project$Account_View$accountDetailView = function (account) {
 													[]),
 												_elm_lang$core$Native_List.fromArray(
 													[
-														A2(
-														_elm_lang$html$Html$div,
-														_elm_lang$core$Native_List.fromArray(
-															[
-																_elm_lang$html$Html_Attributes$class('is-upgraded mdl-js-textfield mdl-textfield')
-															]),
-														_elm_lang$core$Native_List.fromArray(
-															[
-																A2(
-																_elm_lang$html$Html$input,
-																_elm_lang$core$Native_List.fromArray(
-																	[
-																		_elm_lang$html$Html_Attributes$type$('text'),
-																		_elm_lang$html$Html_Attributes$class('mdl-textfield__input'),
-																		_elm_lang$html$Html_Attributes$value(account.fullname),
-																		_elm_lang$html$Html_Attributes$style(
-																		_elm_lang$core$Native_List.fromArray(
-																			[
-																				{ctor: '_Tuple2', _0: 'outline', _1: 'none'}
-																			]))
-																	]),
-																_elm_lang$core$Native_List.fromArray(
-																	[])),
-																A2(
-																_elm_lang$html$Html$label,
-																_elm_lang$core$Native_List.fromArray(
-																	[
-																		_elm_lang$html$Html_Attributes$class('mdl-textfield__label')
-																	]),
-																_elm_lang$core$Native_List.fromArray(
-																	[
-																		_elm_lang$html$Html$text('')
-																	])),
-																A2(
-																_elm_lang$html$Html$div,
-																_elm_lang$core$Native_List.fromArray(
-																	[]),
-																_elm_lang$core$Native_List.fromArray(
-																	[]))
-															])),
+														A2(_user$project$Account_View$editField, account.fullname, 'FullName'),
+														A2(_user$project$Account_View$editField, account.email, 'Email'),
+														A2(_user$project$Account_View$editField, account.team, 'Team'),
+														A2(_user$project$Account_View$editField, account.region, 'Region'),
+														A2(_user$project$Account_View$editField, account.location, 'Location'),
 														A2(
 														_elm_lang$html$Html$div,
 														_elm_lang$core$Native_List.fromArray(
@@ -9464,8 +9210,8 @@ var _user$project$Account_View$viewAccountDetails = F2(
 				_elm_lang$core$List$filter,
 				_user$project$Account_View$matchId(accid),
 				accounts));
-		var _p1 = account;
-		if (_p1.ctor === 'Nothing') {
+		var _p2 = account;
+		if (_p2.ctor === 'Nothing') {
 			return A2(
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
@@ -9475,7 +9221,7 @@ var _user$project$Account_View$viewAccountDetails = F2(
 						_elm_lang$html$Html$text('Not Found')
 					]));
 		} else {
-			return _user$project$Account_View$accountDetailView(_p1._0);
+			return _user$project$Account_View$accountDetailView(_p2._0);
 		}
 	});
 var _user$project$Account_View$viewAccount = function (account) {
@@ -9606,69 +9352,112 @@ var _user$project$State$updateModelSearchText = F2(
 			accountmodel,
 			{searchText: str});
 	});
+var _user$project$State$updateNameChange2 = F2(
+	function (str, model) {
+		var accountmodel = model.accountmodel;
+		var currentaccount = accountmodel.currentaccount;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				accountmodel: _elm_lang$core$Native_Utils.update(
+					accountmodel,
+					{
+						currentaccount: _elm_lang$core$Native_Utils.update(
+							currentaccount,
+							{fullname: str})
+					})
+			});
+	});
 var _user$project$State$update = F2(
 	function (msg, model) {
-		var _p0 = msg;
-		if (_p0.ctor === 'NavigatePage') {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{currentpage: _p0._0}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
-		} else {
-			var _p1 = _p0._0;
-			switch (_p1.ctor) {
-				case 'EditAccount':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								accountmodel: A2(_user$project$State$updateModelAccount, _p1._0, model.accountmodel)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				case 'FetchAllDone':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								accountmodel: A2(_user$project$State$updateModelAccounts, _p1._0, model.accountmodel)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				case 'FetchAllFail':
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								accountmodel: A2(_user$project$State$updateModelSearchText, '', model.accountmodel)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				default:
-					return {
-						ctor: '_Tuple2',
-						_0: _elm_lang$core$Native_Utils.update(
-							model,
-							{
-								accountmodel: A2(_user$project$State$updateModelSearchText, _p1._0, model.accountmodel)
-							}),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-			}
+		var _p0 = A2(_elm_lang$core$Debug$log, 'msg', msg);
+		switch (_p0.ctor) {
+			case 'NavigatePage':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentpage: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'EditAccount':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							accountmodel: A2(_user$project$State$updateModelAccount, _p0._0, model.accountmodel)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'FetchAllDone':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							accountmodel: A2(_user$project$State$updateModelAccounts, _p0._0, model.accountmodel)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'FetchAllFail':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							accountmodel: A2(_user$project$State$updateModelSearchText, '', model.accountmodel)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SearchTextEntered':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							accountmodel: A2(_user$project$State$updateModelSearchText, _p0._0, model.accountmodel)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				var _p1 = A2(_elm_lang$core$Debug$log, 'Sub', _p0._0);
+				switch (_p1.ctor) {
+					case 'FullName':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case 'Email':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case 'Region':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case 'Team':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_user$project$State$updateNameChange2, _p1._0, model),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+				}
 		}
 	});
 var _user$project$State$initialModel = {currentpage: _user$project$Types$AccountsPage, accountmodel: _user$project$Account_State$initialModel};
-var _user$project$State$init = {
-	ctor: '_Tuple2',
-	_0: _user$project$State$initialModel,
-	_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$Types$AccountMsg$, _user$project$Account_Rest$getAccounts)
-};
+var _user$project$State$init = {ctor: '_Tuple2', _0: _user$project$State$initialModel, _1: _user$project$Account_Rest$getAccounts};
 var _user$project$State$initAccount = {uic: '', fullname: '', team: '', location: '', region: '', date_changed: '', workload: 0};
 
 var _user$project$View$viewHeader = function (model) {
