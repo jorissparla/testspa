@@ -3,6 +3,7 @@ module State exposing (..)
 import Types exposing (..)
 import Account.Rest exposing (..)
 import Account.State exposing (..)
+import Update.Extra
 
 
 initAccount =
@@ -35,7 +36,21 @@ update msg model =
            ( { model | currentaccount = account }, Cmd.none )
         -}
         NavigatePage page ->
-            ( { model | currentpage = page }, Cmd.none )
+            case page of
+                AccountDetails str ->
+                    let
+                        theaccount =
+                            model.accountmodel.accounts |> List.filter (\a -> a.uic == str) |> List.head
+                    in
+                        case theaccount of
+                            Nothing ->
+                                ( { model | currentpage = page }, Cmd.none )
+
+                            Just theaccount ->
+                                ( { model | currentpage = page, accountmodel = (updateModelAccount theaccount model.accountmodel) }, Cmd.none )
+
+                _ ->
+                    ( { model | currentpage = page }, Cmd.none )
 
         EditAccount account ->
             ( { model | accountmodel = (updateModelAccount account model.accountmodel) }, Cmd.none )
@@ -44,6 +59,15 @@ update msg model =
             ( { model | accountmodel = (updateModelAccounts newaccounts model.accountmodel) }, Cmd.none )
 
         FetchAllFail error ->
+            ( { model | accountmodel = (updateModelSearchText "" model.accountmodel) }, Cmd.none )
+
+        SaveAccount account ->
+            ( model, updateCurrentAccountDetails model.accountmodel )
+
+        SaveSuccess account ->
+            ( { model | accountmodel = (updateModelAccount account model.accountmodel) }, Cmd.none )
+
+        SaveFail error ->
             ( { model | accountmodel = (updateModelSearchText "" model.accountmodel) }, Cmd.none )
 
         SearchTextEntered str ->
@@ -68,6 +92,15 @@ update msg model =
 
                 Login str ->
                     ( updateLogin str model, Cmd.none )
+
+
+updateCurrentAccountDetails : AccountModel -> Cmd Msg
+updateCurrentAccountDetails accmodel =
+    let
+        theaccount =
+            accmodel.currentaccount |> Debug.log "theaccount"
+    in
+        save theaccount
 
 
 updateLogin : String -> Model -> Model
@@ -206,4 +239,8 @@ updateModelAccounts accounts accountmodel =
 
 updateModelAccount : Account -> AccountModel -> AccountModel
 updateModelAccount account accountmodel =
-    { accountmodel | currentaccount = account }
+    let
+        theAccount =
+            account |> Debug.log "Editaccount"
+    in
+        { accountmodel | currentaccount = account }

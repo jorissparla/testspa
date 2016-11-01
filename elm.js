@@ -8785,14 +8785,39 @@ var _evancz$elm_http$Http$post = F3(
 			A2(_evancz$elm_http$Http$send, _evancz$elm_http$Http$defaultSettings, request));
 	});
 
+var _user$project$Types$Context = F3(
+	function (a, b, c) {
+		return {regions: a, teams: b, locations: c};
+	});
 var _user$project$Types$Model = F2(
 	function (a, b) {
 		return {currentpage: a, accountmodel: b};
 	});
-var _user$project$Types$Account = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {uic: a, login: b, fullname: c, email: d, team: e, location: f, region: g, date_changed: h, workload: i};
-	});
+var _user$project$Types$Account = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {uic: a, login: b, navid: c, firstname: d, lastname: e, fullname: f, email: g, team: h, location: i, region: j, date_changed: k, workload: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Types$AccountModel = F3(
 	function (a, b, c) {
 		return {searchText: a, accounts: b, currentaccount: c};
@@ -8802,6 +8827,12 @@ var _user$project$Types$AccountDetails = function (a) {
 	return {ctor: 'AccountDetails', _0: a};
 };
 var _user$project$Types$AccountsPage = {ctor: 'AccountsPage'};
+var _user$project$Types$SaveFail = function (a) {
+	return {ctor: 'SaveFail', _0: a};
+};
+var _user$project$Types$SaveSuccess = function (a) {
+	return {ctor: 'SaveSuccess', _0: a};
+};
 var _user$project$Types$FieldChange$ = function (a) {
 	return {ctor: 'FieldChange\'', _0: a};
 };
@@ -8810,6 +8841,9 @@ var _user$project$Types$FetchAllFail = function (a) {
 };
 var _user$project$Types$FetchAllDone = function (a) {
 	return {ctor: 'FetchAllDone', _0: a};
+};
+var _user$project$Types$SaveAccount = function (a) {
+	return {ctor: 'SaveAccount', _0: a};
 };
 var _user$project$Types$EditAccount = function (a) {
 	return {ctor: 'EditAccount', _0: a};
@@ -8839,6 +8873,72 @@ var _user$project$Types$FullName = function (a) {
 	return {ctor: 'FullName', _0: a};
 };
 
+var _user$project$Account_Rest$accountEncoder = function (account) {
+	var list = _elm_lang$core$Native_List.fromArray(
+		[
+			{
+			ctor: '_Tuple2',
+			_0: 'uic',
+			_1: _elm_lang$core$Json_Encode$string(account.uic)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'login',
+			_1: _elm_lang$core$Json_Encode$string(account.login)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'navid',
+			_1: _elm_lang$core$Json_Encode$string(account.navid)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'firstname',
+			_1: _elm_lang$core$Json_Encode$string(account.firstname)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'lastname',
+			_1: _elm_lang$core$Json_Encode$string(account.lastname)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'fullname',
+			_1: _elm_lang$core$Json_Encode$string(account.fullname)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'email',
+			_1: _elm_lang$core$Json_Encode$string(account.email)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'team',
+			_1: _elm_lang$core$Json_Encode$string(account.team)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'location',
+			_1: _elm_lang$core$Json_Encode$string(account.location)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'region',
+			_1: _elm_lang$core$Json_Encode$string(account.region)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'date_changed',
+			_1: _elm_lang$core$Json_Encode$string(account.date_changed)
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'workload',
+			_1: _elm_lang$core$Json_Encode$int(account.workload)
+		}
+		]);
+	return _elm_lang$core$Json_Encode$object(list);
+};
 var _user$project$Account_Rest$accountendpoint = 'http://localhost:3000/api/accounts';
 var _user$project$Account_Rest$decodeAccountItem = A3(
 	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
@@ -8870,21 +8970,63 @@ var _user$project$Account_Rest$decodeAccountItem = A3(
 							_elm_lang$core$Json_Decode$string,
 							A3(
 								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-								'login',
+								'lastname',
 								_elm_lang$core$Json_Decode$string,
 								A3(
 									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
-									'uic',
+									'firstname',
 									_elm_lang$core$Json_Decode$string,
-									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Types$Account))))))))));
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'navid',
+										_elm_lang$core$Json_Decode$string,
+										A3(
+											_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+											'login',
+											_elm_lang$core$Json_Decode$string,
+											A3(
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+												'uic',
+												_elm_lang$core$Json_Decode$string,
+												_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Types$Account)))))))))))));
 var _user$project$Account_Rest$decodeAccount = _elm_lang$core$Json_Decode$list(_user$project$Account_Rest$decodeAccountItem);
 var _user$project$Account_Rest$getAccounts = A3(
 	_elm_lang$core$Task$perform,
 	_user$project$Types$FetchAllFail,
 	_user$project$Types$FetchAllDone,
 	A2(_evancz$elm_http$Http$get, _user$project$Account_Rest$decodeAccount, _user$project$Account_Rest$accountendpoint));
+var _user$project$Account_Rest$saveAccount = function (account) {
+	var body = A2(
+		_elm_lang$core$Debug$log,
+		'config',
+		_evancz$elm_http$Http$string(
+			A2(
+				_elm_lang$core$Json_Encode$encode,
+				4,
+				_user$project$Account_Rest$accountEncoder(account))));
+	var config = {
+		verb: 'POST',
+		headers: _elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'Content-Type', _1: 'application/json'}
+			]),
+		url: _user$project$Account_Rest$accountendpoint,
+		body: body
+	};
+	return A2(
+		_evancz$elm_http$Http$fromJson,
+		_user$project$Account_Rest$decodeAccountItem,
+		A2(_evancz$elm_http$Http$send, _evancz$elm_http$Http$defaultSettings, config));
+};
+var _user$project$Account_Rest$save = function (account) {
+	return A3(
+		_elm_lang$core$Task$perform,
+		_user$project$Types$SaveFail,
+		_user$project$Types$SaveSuccess,
+		_user$project$Account_Rest$saveAccount(account));
+};
 
-var _user$project$Account_State$initAccount = {uic: '', fullname: '', email: '', team: '', location: '', region: '', date_changed: '', workload: 0};
+var _user$project$Account_State$initAccount = {uic: '', login: '', navid: '', firstname: '', lastname: '', fullname: '', email: '', team: '', location: '', region: '', date_changed: '', workload: 0};
 var _user$project$Account_State$initialModel = {
 	searchText: '',
 	accounts: _elm_lang$core$Native_List.fromArray(
@@ -9251,6 +9393,9 @@ var _user$project$Account_View$accountDetailView = function (account) {
 												_elm_lang$core$Native_List.fromArray(
 													[
 														A3(_user$project$Account_View$editField, account.login, 'Login', _user$project$Types$Login),
+														A3(_user$project$Account_View$editField, account.navid, 'NavigatorId', _user$project$Types$FullName),
+														A3(_user$project$Account_View$editField, account.firstname, 'First Name', _user$project$Types$FullName),
+														A3(_user$project$Account_View$editField, account.lastname, 'Last Name', _user$project$Types$FullName),
 														A3(_user$project$Account_View$editField, account.fullname, 'FullName', _user$project$Types$FullName),
 														A3(_user$project$Account_View$editField, account.email, 'Email', _user$project$Types$Email),
 														A3(_user$project$Account_View$editField, account.team, 'Team', _user$project$Types$Team),
@@ -9301,11 +9446,23 @@ var _user$project$Account_View$accountDetailView = function (account) {
 															[
 																_elm_lang$html$Html_Attributes$class('mdl-js-button mdl-button mdl-button--colored mdl-button--raised'),
 																_elm_lang$html$Html_Events$onClick(
-																_user$project$Types$NavigatePage(_user$project$Types$AccountsPage))
+																_user$project$Types$SaveAccount(account))
 															]),
 														_elm_lang$core$Native_List.fromArray(
 															[
 																_elm_lang$html$Html$text('Submit')
+															])),
+														A2(
+														_elm_lang$html$Html$button,
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html_Attributes$class('mdl-js-button mdl-button mdl-button--colored mdl-button--raised'),
+																_elm_lang$html$Html_Events$onClick(
+																_user$project$Types$NavigatePage(_user$project$Types$AccountsPage))
+															]),
+														_elm_lang$core$Native_List.fromArray(
+															[
+																_elm_lang$html$Html$text('Cancel')
 															]))
 													]))
 											]))
@@ -9447,6 +9604,7 @@ var _user$project$Account_View$viewAccounts = function (model) {
 
 var _user$project$State$updateModelAccount = F2(
 	function (account, accountmodel) {
+		var theAccount = A2(_elm_lang$core$Debug$log, 'Editaccount', account);
 		return _elm_lang$core$Native_Utils.update(
 			accountmodel,
 			{currentaccount: account});
@@ -9559,18 +9717,55 @@ var _user$project$State$updateLogin = F2(
 					})
 			});
 	});
+var _user$project$State$updateCurrentAccountDetails = function (accmodel) {
+	var theaccount = A2(_elm_lang$core$Debug$log, 'theaccount', accmodel.currentaccount);
+	return _user$project$Account_Rest$save(theaccount);
+};
 var _user$project$State$update = F2(
 	function (msg, model) {
 		var _p0 = A2(_elm_lang$core$Debug$log, 'msg', msg);
 		switch (_p0.ctor) {
 			case 'NavigatePage':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{currentpage: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+				var _p3 = _p0._0;
+				var _p1 = _p3;
+				if (_p1.ctor === 'AccountDetails') {
+					var theaccount = _elm_lang$core$List$head(
+						A2(
+							_elm_lang$core$List$filter,
+							function (a) {
+								return _elm_lang$core$Native_Utils.eq(a.uic, _p1._0);
+							},
+							model.accountmodel.accounts));
+					var _p2 = theaccount;
+					if (_p2.ctor === 'Nothing') {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{currentpage: _p3}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					} else {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									currentpage: _p3,
+									accountmodel: A2(_user$project$State$updateModelAccount, _p2._0, model.accountmodel)
+								}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					}
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{currentpage: _p3}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
 			case 'EditAccount':
 				return {
 					ctor: '_Tuple2',
@@ -9601,6 +9796,32 @@ var _user$project$State$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
+			case 'SaveAccount':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$State$updateCurrentAccountDetails(model.accountmodel)
+				};
+			case 'SaveSuccess':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							accountmodel: A2(_user$project$State$updateModelAccount, _p0._0, model.accountmodel)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SaveFail':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							accountmodel: A2(_user$project$State$updateModelSearchText, '', model.accountmodel)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'SearchTextEntered':
 				return {
 					ctor: '_Tuple2',
@@ -9612,42 +9833,42 @@ var _user$project$State$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
-				var _p1 = A2(_elm_lang$core$Debug$log, 'Sub', _p0._0);
-				switch (_p1.ctor) {
+				var _p4 = A2(_elm_lang$core$Debug$log, 'Sub', _p0._0);
+				switch (_p4.ctor) {
 					case 'FullName':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateFullName, _p1._0, model),
+							_0: A2(_user$project$State$updateFullName, _p4._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Email':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateEmail, _p1._0, model),
+							_0: A2(_user$project$State$updateEmail, _p4._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Region':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateRegion, _p1._0, model),
+							_0: A2(_user$project$State$updateRegion, _p4._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Team':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateTeam, _p1._0, model),
+							_0: A2(_user$project$State$updateTeam, _p4._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Location':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateLocation, _p1._0, model),
+							_0: A2(_user$project$State$updateLocation, _p4._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_user$project$State$updateLogin, _p1._0, model),
+							_0: A2(_user$project$State$updateLogin, _p4._0, model),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}

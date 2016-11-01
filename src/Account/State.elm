@@ -5,6 +5,10 @@ import Types exposing (..)
 
 initAccount =
     { uic = ""
+    , login = ""
+    , navid = ""
+    , firstname = ""
+    , lastname = ""
     , fullname = ""
     , email = ""
     , team = ""

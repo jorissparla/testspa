@@ -30,9 +30,12 @@ type Msg
     = NavigatePage Page
     | SearchTextEntered String
     | EditAccount Account
+    | SaveAccount Account
     | FetchAllDone (List Account)
     | FetchAllFail Http.Error
     | FieldChange' FieldChange
+    | SaveSuccess Account
+    | SaveFail Http.Error
 
 
 type FieldChange
@@ -57,6 +60,8 @@ type alias Account =
     { uic : String
     , login : String
     , navid : String
+    , firstname : String
+    , lastname : String
     , fullname : String
     , email : String
     , team : String

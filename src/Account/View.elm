@@ -76,6 +76,9 @@ accountDetailView account =
                     , div [ class "", style [ ( "justify-content", "left" ), ( "align-items", "center" ), ( "display", "flex" ) ] ]
                         [ div []
                             [ editField account.login "Login" Login
+                            , editField account.navid "NavigatorId" FullName
+                            , editField account.firstname "First Name" FullName
+                            , editField account.lastname "Last Name" FullName
                             , editField account.fullname "FullName" FullName
                             , editField account.email "Email" Email
                             , editField account.team "Team" Team
@@ -89,8 +92,10 @@ accountDetailView account =
                                 , div []
                                     []
                                 ]
-                            , button [ class "mdl-js-button mdl-button mdl-button--colored mdl-button--raised", onClick (Types.NavigatePage Types.AccountsPage) ]
+                            , button [ class "mdl-js-button mdl-button mdl-button--colored mdl-button--raised", onClick (SaveAccount account) ]
                                 [ text "Submit" ]
+                            , button [ class "mdl-js-button mdl-button mdl-button--colored mdl-button--raised", onClick (Types.NavigatePage Types.AccountsPage) ]
+                                [ text "Cancel" ]
                             ]
                         ]
                     ]
