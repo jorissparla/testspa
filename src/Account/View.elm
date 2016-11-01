@@ -75,7 +75,8 @@ accountDetailView account =
                     [ text "Edit Details"
                     , div [ class "", style [ ( "justify-content", "left" ), ( "align-items", "center" ), ( "display", "flex" ) ] ]
                         [ div []
-                            [ editField account.fullname "FullName" FullName
+                            [ editField account.login "Login" Login
+                            , editField account.fullname "FullName" FullName
                             , editField account.email "Email" Email
                             , editField account.team "Team" Team
                             , editField account.region "Region" Region

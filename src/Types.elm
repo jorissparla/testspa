@@ -3,6 +3,13 @@ module Types exposing (..)
 import Http
 
 
+type alias Context =
+    { regions : List String
+    , teams : List String
+    , locations : List String
+    }
+
+
 type Page
     = AccountsPage
     | AccountDetails AccountID
@@ -34,6 +41,7 @@ type FieldChange
     | Region String
     | Location String
     | Team String
+    | Login String
 
 
 
@@ -47,6 +55,8 @@ type FieldChange
 
 type alias Account =
     { uic : String
+    , login : String
+    , navid : String
     , fullname : String
     , email : String
     , team : String

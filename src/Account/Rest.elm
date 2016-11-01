@@ -2,22 +2,24 @@ module Account.Rest exposing (..)
 
 import Http
 import Json.Decode exposing (..)
+import Json.Decode as Decode
+import Json.Decode.Pipeline exposing (required, decode)
 import Task
 import Types exposing (..)
 
 
-decodeAccountItem : Decoder Account
 decodeAccountItem =
-    object8
-        Account
-        ("uic" := string)
-        ("fullname" := string)
-        ("email" := string)
-        ("team" := string)
-        ("location" := string)
-        ("region" := string)
-        ("date_changed" := string)
-        ("workload" := int)
+    decode Account
+        |> required "uic" Decode.string
+        |> required "login" Decode.string
+        |> required "navid" Decode.string
+        |> required "fullname" Decode.string
+        |> required "email" Decode.string
+        |> required "team" Decode.string
+        |> required "location" Decode.string
+        |> required "region" Decode.string
+        |> required "date_changed" Decode.string
+        |> required "workload" Decode.int
 
 
 decodeAccount : Decoder (List Account)

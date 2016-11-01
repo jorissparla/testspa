@@ -52,7 +52,7 @@ update msg model =
         FieldChange' sub ->
             case Debug.log "Sub" sub of
                 FullName str ->
-                    ( updateNameChange str model, Cmd.none )
+                    ( updateFullName str model, Cmd.none )
 
                 Email str ->
                     ( updateEmail str model, Cmd.none )
@@ -66,9 +66,12 @@ update msg model =
                 Location str ->
                     ( updateLocation str model, Cmd.none )
 
+                Login str ->
+                    ( updateLogin str model, Cmd.none )
 
-updateNameChange : String -> Model -> Model
-updateNameChange str model =
+
+updateLogin : String -> Model -> Model
+updateLogin str model =
     let
         accountmodel =
             model.accountmodel
@@ -81,7 +84,7 @@ updateNameChange str model =
                 { accountmodel
                     | currentaccount =
                         { currentaccount
-                            | fullname = str
+                            | login = str
                         }
                 }
         }
